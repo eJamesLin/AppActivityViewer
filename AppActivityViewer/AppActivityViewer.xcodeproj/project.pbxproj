@@ -11,10 +11,10 @@
 		DB48EA3826824CB1009DE47E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB48EA3726824CB1009DE47E /* ContentView.swift */; };
 		DB48EA3A26824CB2009DE47E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB48EA3926824CB2009DE47E /* Assets.xcassets */; };
 		DB48EA3D26824CB2009DE47E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB48EA3C26824CB2009DE47E /* Preview Assets.xcassets */; };
-		DB48EA4426824CFB009DE47E /* app-privacy-report-2021-06-22-13-51.json in Resources */ = {isa = PBXBuildFile; fileRef = DB48EA4326824CFB009DE47E /* app-privacy-report-2021-06-22-13-51.json */; };
-		DB5D207C268B8E9800AEBAFB /* app-privacy-report-2021-06-30-01-23.json in Resources */ = {isa = PBXBuildFile; fileRef = DB5D207B268B8E9800AEBAFB /* app-privacy-report-2021-06-30-01-23.json */; };
-		DB5D207E268B930400AEBAFB /* AppActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D207D268B930400AEBAFB /* AppActivity.swift */; };
+		DB48EA4426824CFB009DE47E /* app-privacy-report-sample.json in Resources */ = {isa = PBXBuildFile; fileRef = DB48EA4326824CFB009DE47E /* app-privacy-report-sample.json */; };
+		DB5D207E268B930400AEBAFB /* NetworkActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D207D268B930400AEBAFB /* NetworkActivity.swift */; };
 		DBAAE8C5268E3ADC005BB0C4 /* SingleAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAAE8C4268E3ADC005BB0C4 /* SingleAppView.swift */; };
+		DBAAE8C7268E4A2A005BB0C4 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAAE8C6268E4A2A005BB0C4 /* SearchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,10 +23,10 @@
 		DB48EA3726824CB1009DE47E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DB48EA3926824CB2009DE47E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB48EA3C26824CB2009DE47E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		DB48EA4326824CFB009DE47E /* app-privacy-report-2021-06-22-13-51.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "app-privacy-report-2021-06-22-13-51.json"; sourceTree = "<group>"; };
-		DB5D207B268B8E9800AEBAFB /* app-privacy-report-2021-06-30-01-23.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "app-privacy-report-2021-06-30-01-23.json"; sourceTree = "<group>"; };
-		DB5D207D268B930400AEBAFB /* AppActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActivity.swift; sourceTree = "<group>"; };
+		DB48EA4326824CFB009DE47E /* app-privacy-report-sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "app-privacy-report-sample.json"; sourceTree = "<group>"; };
+		DB5D207D268B930400AEBAFB /* NetworkActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkActivity.swift; sourceTree = "<group>"; };
 		DBAAE8C4268E3ADC005BB0C4 /* SingleAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAppView.swift; sourceTree = "<group>"; };
+		DBAAE8C6268E4A2A005BB0C4 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +61,11 @@
 			children = (
 				DB48EA3526824CB1009DE47E /* AppActivityViewerApp.swift */,
 				DB48EA3726824CB1009DE47E /* ContentView.swift */,
+				DBAAE8C6268E4A2A005BB0C4 /* SearchBar.swift */,
 				DBAAE8C4268E3ADC005BB0C4 /* SingleAppView.swift */,
-				DB5D207D268B930400AEBAFB /* AppActivity.swift */,
+				DB5D207D268B930400AEBAFB /* NetworkActivity.swift */,
 				DB48EA3926824CB2009DE47E /* Assets.xcassets */,
-				DB48EA4326824CFB009DE47E /* app-privacy-report-2021-06-22-13-51.json */,
-				DB5D207B268B8E9800AEBAFB /* app-privacy-report-2021-06-30-01-23.json */,
+				DB48EA4326824CFB009DE47E /* app-privacy-report-sample.json */,
 				DB48EA3B26824CB2009DE47E /* Preview Content */,
 			);
 			path = AppActivityViewer;
@@ -143,8 +143,7 @@
 			files = (
 				DB48EA3D26824CB2009DE47E /* Preview Assets.xcassets in Resources */,
 				DB48EA3A26824CB2009DE47E /* Assets.xcassets in Resources */,
-				DB5D207C268B8E9800AEBAFB /* app-privacy-report-2021-06-30-01-23.json in Resources */,
-				DB48EA4426824CFB009DE47E /* app-privacy-report-2021-06-22-13-51.json in Resources */,
+				DB48EA4426824CFB009DE47E /* app-privacy-report-sample.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,7 +156,8 @@
 			files = (
 				DB48EA3826824CB1009DE47E /* ContentView.swift in Sources */,
 				DBAAE8C5268E3ADC005BB0C4 /* SingleAppView.swift in Sources */,
-				DB5D207E268B930400AEBAFB /* AppActivity.swift in Sources */,
+				DBAAE8C7268E4A2A005BB0C4 /* SearchBar.swift in Sources */,
+				DB5D207E268B930400AEBAFB /* NetworkActivity.swift in Sources */,
 				DB48EA3626824CB1009DE47E /* AppActivityViewerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
