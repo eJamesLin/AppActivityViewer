@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB1CC8A42690643600BE2280 /* URL+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC675AD269040D100E5A5C0 /* URL+AppGroup.swift */; };
 		DB48EA3626824CB1009DE47E /* AppActivityViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB48EA3526824CB1009DE47E /* AppActivityViewerApp.swift */; };
 		DB48EA3826824CB1009DE47E /* AppsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB48EA3726824CB1009DE47E /* AppsView.swift */; };
 		DB48EA3A26824CB2009DE47E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB48EA3926824CB2009DE47E /* Assets.xcassets */; };
@@ -286,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBC67599268F91B400E5A5C0 /* ShareViewController.swift in Sources */,
+				DB1CC8A42690643600BE2280 /* URL+AppGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
