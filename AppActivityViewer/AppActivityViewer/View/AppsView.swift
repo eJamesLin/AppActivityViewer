@@ -23,7 +23,7 @@ struct AppsView: View {
                 VStack {
                     SearchBar(text: $searchText, placeholder: "")
                     List {
-                        ForEach(filteredApps(apps: apps), id: \.self) { bundleID in
+                        ForEach(Helper.filteredApps(apps: apps, searchText: searchText), id: \.self) { bundleID in
                             NavigationLink(
                                 destination: SingleAppView(bundleID: bundleID, activities: apps[bundleID]!),
                                 label: { Text(bundleID) }
@@ -45,19 +45,11 @@ struct AppsView: View {
         .task {
             async {
                 do {
-                    try self.apps = await ViewModel.importReport(fileName: fileName)
+                    try self.apps = await Helper.importReport(fileName: fileName)
                 } catch {
                     self.error = error
                 }
             }
-        }
-    }
-
-    func filteredApps(apps: AppActivities) -> [String] {
-        Array(apps.keys).filter {
-            searchText.isEmpty
-            ? true
-            : $0.lowercased().contains(searchText.lowercased())
         }
     }
 }

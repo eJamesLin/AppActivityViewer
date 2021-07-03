@@ -111,7 +111,7 @@
 				DBC675AB26903F7300E5A5C0 /* Model */,
 				DBC675A426901A8900E5A5C0 /* AppActivityViewer.entitlements */,
 				DB48EA3526824CB1009DE47E /* AppActivityViewerApp.swift */,
-				DBC675AC26903F9400E5A5C0 /* ViewModel */,
+				DBC675AC26903F9400E5A5C0 /* Helper */,
 				DBC675AA26903F6000E5A5C0 /* View */,
 				DB48EA3926824CB2009DE47E /* Assets.xcassets */,
 				DB48EA3B26824CB2009DE47E /* Preview Content */,
@@ -157,13 +157,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		DBC675AC26903F9400E5A5C0 /* ViewModel */ = {
+		DBC675AC26903F9400E5A5C0 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
 				DBC675AD269040D100E5A5C0 /* URL+AppGroup.swift */,
 				DBC675A826903E2900E5A5C0 /* ViewModel.swift */,
 			);
-			path = ViewModel;
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -1,5 +1,5 @@
 //
-//  ViewModel.swift
+//  Helper.swift
 //  AppActivityViewer
 //
 //  Created by cjlin on 2021/7/3.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ViewModel {
+enum Helper {
 
     enum DataError: Error {
         case formatError
@@ -33,4 +33,13 @@ enum ViewModel {
             $0.hasSuffix(".json")
         }
     }
+
+    static func filteredApps(apps: AppActivities, searchText: String) -> [String] {
+        Array(apps.keys).filter {
+            searchText.isEmpty
+            ? true
+            : $0.lowercased().contains(searchText.lowercased())
+        }
+    }
+
 }

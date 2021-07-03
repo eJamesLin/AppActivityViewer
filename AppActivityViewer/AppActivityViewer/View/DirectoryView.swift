@@ -38,7 +38,7 @@ struct DirectoryView: View {
             .onChange(of: scenePhase) { newPhase in
                 if newPhase == .active {
                     async {
-                        try fileList = await ViewModel.jsonFileListInApp()
+                        try fileList = await Helper.jsonFileListInApp()
                     }
                 }
             }
