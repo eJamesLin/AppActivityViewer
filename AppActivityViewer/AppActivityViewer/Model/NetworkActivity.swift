@@ -9,7 +9,7 @@ import Foundation
 
 typealias AppActivities = [String: [NetworkActivity]]
 
-/// https://developer.apple.com/documentation/foundation/urlrequest/
+/// https://developer.apple.com/documentation/foundation/urlrequest/inspecting_app_activity_data
 struct NetworkActivity: Decodable, Hashable {
     
     let domain: String

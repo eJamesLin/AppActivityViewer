@@ -11,7 +11,6 @@
 		DB48EA3826824CB1009DE47E /* AppsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB48EA3726824CB1009DE47E /* AppsView.swift */; };
 		DB48EA3A26824CB2009DE47E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB48EA3926824CB2009DE47E /* Assets.xcassets */; };
 		DB48EA3D26824CB2009DE47E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB48EA3C26824CB2009DE47E /* Preview Assets.xcassets */; };
-		DB48EA4426824CFB009DE47E /* app-privacy-report-sample.json in Resources */ = {isa = PBXBuildFile; fileRef = DB48EA4326824CFB009DE47E /* app-privacy-report-sample.json */; };
 		DB5D207E268B930400AEBAFB /* NetworkActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D207D268B930400AEBAFB /* NetworkActivity.swift */; };
 		DBAAE8C5268E3ADC005BB0C4 /* SingleAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAAE8C4268E3ADC005BB0C4 /* SingleAppView.swift */; };
 		DBAAE8C7268E4A2A005BB0C4 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBAAE8C6268E4A2A005BB0C4 /* SearchBar.swift */; };
@@ -21,7 +20,6 @@
 		DBC675A7269033E000E5A5C0 /* DirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC675A6269033E000E5A5C0 /* DirectoryView.swift */; };
 		DBC675A926903E2900E5A5C0 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC675A826903E2900E5A5C0 /* ViewModel.swift */; };
 		DBC675AE269040D100E5A5C0 /* URL+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC675AD269040D100E5A5C0 /* URL+AppGroup.swift */; };
-		DBC675AF2690411400E5A5C0 /* URL+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC675AD269040D100E5A5C0 /* URL+AppGroup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +53,6 @@
 		DB48EA3726824CB1009DE47E /* AppsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsView.swift; sourceTree = "<group>"; };
 		DB48EA3926824CB2009DE47E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB48EA3C26824CB2009DE47E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		DB48EA4326824CFB009DE47E /* app-privacy-report-sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "app-privacy-report-sample.json"; sourceTree = "<group>"; };
 		DB5D207D268B930400AEBAFB /* NetworkActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkActivity.swift; sourceTree = "<group>"; };
 		DBAAE8C4268E3ADC005BB0C4 /* SingleAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAppView.swift; sourceTree = "<group>"; };
 		DBAAE8C6268E4A2A005BB0C4 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -116,7 +113,6 @@
 				DBC675AC26903F9400E5A5C0 /* ViewModel */,
 				DBC675AA26903F6000E5A5C0 /* View */,
 				DB48EA3926824CB2009DE47E /* Assets.xcassets */,
-				DB48EA4326824CFB009DE47E /* app-privacy-report-sample.json */,
 				DB48EA3B26824CB2009DE47E /* Preview Content */,
 			);
 			path = AppActivityViewer;
@@ -156,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				DB5D207D268B930400AEBAFB /* NetworkActivity.swift */,
-				DBC675AD269040D100E5A5C0 /* URL+AppGroup.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -164,6 +159,7 @@
 		DBC675AC26903F9400E5A5C0 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				DBC675AD269040D100E5A5C0 /* URL+AppGroup.swift */,
 				DBC675A826903E2900E5A5C0 /* ViewModel.swift */,
 			);
 			path = ViewModel;
@@ -256,7 +252,6 @@
 			files = (
 				DB48EA3D26824CB2009DE47E /* Preview Assets.xcassets in Resources */,
 				DB48EA3A26824CB2009DE47E /* Assets.xcassets in Resources */,
-				DB48EA4426824CFB009DE47E /* app-privacy-report-sample.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +286,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBC67599268F91B400E5A5C0 /* ShareViewController.swift in Sources */,
-				DBC675AF2690411400E5A5C0 /* URL+AppGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
