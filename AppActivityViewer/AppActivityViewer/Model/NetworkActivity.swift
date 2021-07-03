@@ -6,10 +6,10 @@
 //
 
 import Foundation
-import SwiftUI
 
 typealias AppActivities = [String: [NetworkActivity]]
 
+/// https://developer.apple.com/documentation/foundation/urlrequest/
 struct NetworkActivity: Decodable, Hashable {
     
     let domain: String
