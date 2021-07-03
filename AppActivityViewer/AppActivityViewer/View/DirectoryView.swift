@@ -42,10 +42,10 @@ struct DirectoryView: View {
                 }
             }
             .navigationTitle("App Activity Viewer")
-        }
-        .task {
-            async {
-                try fileList = await ViewModel.jsonFileListInApp()
+            .task {
+                async {
+                    try fileList = await ViewModel.jsonFileListInApp()
+                }
             }
         }
     }
