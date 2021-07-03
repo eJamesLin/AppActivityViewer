@@ -13,6 +13,8 @@ struct AppsView: View {
 
     @State private var apps: AppActivities?
 
+    @State private var error: Error?
+
     @State private var searchText = ""
 
     var body: some View {
@@ -30,7 +32,11 @@ struct AppsView: View {
 
                     }
                 }
-            } else {
+            }
+            else if let error = error {
+                Text(error.localizedDescription).padding(20)
+            }
+            else {
                 ProgressView()
             }
         }
@@ -38,7 +44,11 @@ struct AppsView: View {
         .navigationBarTitleDisplayMode(.inline)
         .task {
             async {
-                try self.apps = await ViewModel.importReport(fileName: fileName)
+                do {
+                    try self.apps = await ViewModel.importReport(fileName: fileName)
+                } catch {
+                    self.error = error
+                }
             }
         }
     }
