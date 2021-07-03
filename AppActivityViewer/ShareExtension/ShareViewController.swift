@@ -8,34 +8,57 @@
 import UIKit
 import Social
 
-class ShareViewController: SLComposeServiceViewController {
+class ShareViewController: UIViewController {
 
-    override func isContentValid() -> Bool {
-        // Do validation of contentText and/or NSExtensionContext attachments here
-        return true
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+
+    @IBOutlet weak var successView: UIImageView!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.writeFile()
+        }
     }
 
-    override func didSelectPost() {
-        // This is called after the user selects Post. Do the upload of contentText and/or NSExtensionContext attachments.
+    private func writeFile() {
         let identifier = "public.json"
+
         let provider = (self.extensionContext?.inputItems.first as? NSExtensionItem)?.attachments?.first
-        if provider?.hasItemConformingToTypeIdentifier(identifier) == true {
-            provider?.loadItem(forTypeIdentifier: identifier, options: nil, completionHandler: { (item, error) in
-                if let url = item as? URL {
-                    let data = try? Data(contentsOf: url)
-                    let tmpURL = URL.appGroupSharedFolder().appendingPathComponent(url.lastPathComponent)
-                    try? data?.write(to: tmpURL, options: .atomic)
-                }
-            })
+        guard provider?.hasItemConformingToTypeIdentifier(identifier) == true else {
+            cancel()
+            return
         }
 
-        // Inform the host that we're done, so it un-blocks its UI. Note: Alternatively you could call super's -didSelectPost, which will similarly complete the extension context.
-        self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+        provider?.loadItem(forTypeIdentifier: identifier, options: nil, completionHandler: { (item, error) in
+            guard let url = item as? URL else {
+                self.cancel()
+                return
+            }
+
+            do {
+                let data = try Data(contentsOf: url)
+                let tmpURL = URL.appGroupSharedFolder().appendingPathComponent(url.lastPathComponent)
+                try data.write(to: tmpURL, options: .atomic)
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.spinner.stopAnimating()
+                    self.spinner.isHidden = true
+                    self.successView.isHidden = false
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+                    }
+                }
+            } catch {
+                self.cancel()
+            }
+        })
     }
 
-    override func configurationItems() -> [Any]! {
-        // To add configuration options via table cells at the bottom of the sheet, return an array of SLComposeSheetConfigurationItem here.
-        return []
+    private func cancel() {
+        let error = NSError(domain: "", code: 0, userInfo: nil)
+        extensionContext?.cancelRequest(withError: error)
     }
-
 }
