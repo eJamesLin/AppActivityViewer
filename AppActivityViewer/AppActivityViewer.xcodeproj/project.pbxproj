@@ -19,7 +19,7 @@
 		DBC6759C268F91B400E5A5C0 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBC6759A268F91B400E5A5C0 /* MainInterface.storyboard */; };
 		DBC675A0268F91B400E5A5C0 /* ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DBC67596268F91B400E5A5C0 /* ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DBC675A7269033E000E5A5C0 /* DirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC675A6269033E000E5A5C0 /* DirectoryView.swift */; };
-		DBC675A926903E2900E5A5C0 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC675A826903E2900E5A5C0 /* ViewModel.swift */; };
+		DBC675A926903E2900E5A5C0 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC675A826903E2900E5A5C0 /* Helper.swift */; };
 		DBC675AE269040D100E5A5C0 /* URL+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC675AD269040D100E5A5C0 /* URL+AppGroup.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,7 +64,7 @@
 		DBC675A426901A8900E5A5C0 /* AppActivityViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppActivityViewer.entitlements; sourceTree = "<group>"; };
 		DBC675A526901B1D00E5A5C0 /* ShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShareExtension.entitlements; sourceTree = "<group>"; };
 		DBC675A6269033E000E5A5C0 /* DirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryView.swift; sourceTree = "<group>"; };
-		DBC675A826903E2900E5A5C0 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		DBC675A826903E2900E5A5C0 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		DBC675AD269040D100E5A5C0 /* URL+AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+AppGroup.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -161,7 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				DBC675AD269040D100E5A5C0 /* URL+AppGroup.swift */,
-				DBC675A826903E2900E5A5C0 /* ViewModel.swift */,
+				DBC675A826903E2900E5A5C0 /* Helper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -278,7 +278,7 @@
 				DBAAE8C7268E4A2A005BB0C4 /* SearchBar.swift in Sources */,
 				DB5D207E268B930400AEBAFB /* NetworkActivity.swift in Sources */,
 				DB48EA3626824CB1009DE47E /* AppActivityViewerApp.swift in Sources */,
-				DBC675A926903E2900E5A5C0 /* ViewModel.swift in Sources */,
+				DBC675A926903E2900E5A5C0 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
