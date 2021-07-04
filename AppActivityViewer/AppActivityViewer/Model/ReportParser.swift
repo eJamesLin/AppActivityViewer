@@ -12,44 +12,36 @@ enum ReportError: Error {
 }
 
 /// https://developer.apple.com/documentation/foundation/urlrequest/inspecting_app_activity_data
-class ReportParser {
+enum ReportParser {
 
-    private var resources: [ResourceAccessData]?
-    private var networks: NetworkActivities?
-
-    // FIXME: Use the new Swift concurrency to replace GCD
-    func parse(content: String) async throws -> ([ResourceAccessData], NetworkActivities) {
-
+    static func parse(content: String) async throws -> ([ResourceAccessData], NetworkActivities) {
         guard let resourceStart = content.range(of: "<metadata>\"}"),
               let resourceEnd = content.range(of: "<end-of-section>\"}") else {
                   throw ReportError.error
               }
 
-        typealias Continuation = CheckedContinuation<([ResourceAccessData], NetworkActivities), Error>
+        async let resource = parseResourceAccess(content: content[resourceStart.upperBound..<resourceEnd.upperBound])
+        async let network = parseNetworkActivity(content: content[resourceEnd.upperBound...])
+        return try await (resource, network)
+    }
 
+    // FIXME: Use the new Swift concurrency to replace GCD
+    static func parseResourceAccess(content: Substring) async throws -> [ResourceAccessData] {
+        typealias Continuation = CheckedContinuation<[ResourceAccessData], Error>
         return try await withCheckedThrowingContinuation { (continuation: Continuation) in
-            let dispatchGroup = DispatchGroup()
-
-            dispatchGroup.enter()
             DispatchQueue.global(qos: .userInitiated).async {
-                self.resources = self.parseResourceAccess(
-                    content: content[resourceStart.upperBound..<resourceEnd.upperBound]
-                )
-                dispatchGroup.leave()
-            }
 
-            dispatchGroup.enter()
-            DispatchQueue.global(qos: .userInitiated).async {
-                self.networks = self.parseNetworkActivity(
-                    content: content[resourceEnd.upperBound...]
-                )
-                dispatchGroup.leave()
-            }
+                let array = content.split(separator: "\n")
+                    .dropLast() // drop { "_marker" : "<end-of-section>" }
 
-            dispatchGroup.notify(queue: .main) {
-                if let resources = self.resources,
-                   let networks = self.networks {
-                    continuation.resume(returning: (resources, networks))
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+
+                let resourcesAccess = try? array.map {
+                    try decoder.decode(ResourceAccessData.self, from: $0.data(using: .ascii)!)
+                }
+                if let resourcesAccess = resourcesAccess {
+                    continuation.resume(returning: resourcesAccess)
                 } else {
                     continuation.resume(throwing: ReportError.error)
                 }
@@ -57,23 +49,26 @@ class ReportParser {
         }
     }
 
-    func parseResourceAccess(content: Substring) -> [ResourceAccessData]? {
-        let array = content.split(separator: "\n")
-            .dropLast() // drop { "_marker" : "<end-of-section>" }
+    // FIXME: Use the new Swift concurrency to replace GCD
+    static func parseNetworkActivity(content: Substring) async throws -> NetworkActivities {
+        typealias Continuation = CheckedContinuation<NetworkActivities, Error>
+        return try await withCheckedThrowingContinuation { (continuation: Continuation) in
+            DispatchQueue.global(qos: .userInitiated).async {
 
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+                guard let jsonData = content.data(using: .ascii) else {
+                    continuation.resume(throwing: ReportError.error)
+                    return
+                }
 
-        return try? array.map {
-            try decoder.decode(ResourceAccessData.self, from: $0.data(using: .ascii)!)
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+
+                if let networkActivities = try? decoder.decode(NetworkActivities.self, from: jsonData) {
+                    continuation.resume(returning: networkActivities)
+                } else {
+                    continuation.resume(throwing: ReportError.error)
+                }
+            }
         }
-    }
-
-    func parseNetworkActivity(content: Substring) -> NetworkActivities? {
-        guard let jsonData = content.data(using: .ascii) else { return nil }
-
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        return try? decoder.decode(NetworkActivities.self, from: jsonData)
     }
 }

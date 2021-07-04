@@ -12,7 +12,7 @@ enum Helper {
         let url = URL.appGroupSharedFolder().appendingPathComponent(fileName)
         let (data, _) = try await URLSession.shared.data(from: url)
         guard let content = String(data: data, encoding: .ascii) else { throw ReportError.error }
-        return try await ReportParser().parse(content: content)
+        return try await ReportParser.parse(content: content)
     }
 
     static func jsonFileListInApp() async throws -> [String] {
