@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias AppActivities = [String: [NetworkActivity]]
+typealias NetworkActivities = [String: [NetworkActivity]]
 
 /// https://developer.apple.com/documentation/foundation/urlrequest/inspecting_app_activity_data
 struct NetworkActivity: Decodable, Hashable {

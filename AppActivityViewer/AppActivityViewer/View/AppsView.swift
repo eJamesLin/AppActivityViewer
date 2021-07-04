@@ -11,7 +11,9 @@ struct AppsView: View {
 
     let fileName: String
 
-    @State private var apps: AppActivities?
+    @State private var networkActivities: NetworkActivities?
+
+    @State private var resourcesAccess: [ResourceAccessData]?
 
     @State private var error: Error?
 
@@ -19,13 +21,16 @@ struct AppsView: View {
 
     var body: some View {
         ZStack {
-            if let apps = apps {
+            if let networkActivities = networkActivities {
                 VStack {
                     SearchBar(text: $searchText, placeholder: "")
                     List {
-                        ForEach(Helper.filteredApps(apps: apps, searchText: searchText), id: \.self) { bundleID in
+                        ForEach(Helper.filteredApps(networkActivities: networkActivities, searchText: searchText),
+                                id: \.self)
+                        { bundleID in
                             NavigationLink(
-                                destination: SingleAppView(bundleID: bundleID, activities: apps[bundleID]!),
+                                destination: SingleAppView(bundleID: bundleID,
+                                                           activities: networkActivities[bundleID]!),
                                 label: { Text(bundleID) }
                             )
                         }
@@ -45,7 +50,7 @@ struct AppsView: View {
         .task {
             async {
                 do {
-                    try self.apps = await Helper.importReport(fileName: fileName)
+                    try (self.resourcesAccess, self.networkActivities) = await Helper.importReport(fileName: fileName)
                 } catch {
                     self.error = error
                 }

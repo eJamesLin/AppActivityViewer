@@ -8,11 +8,11 @@
 import Foundation
 
 enum Helper {
-    static func importReport(fileName: String) async throws -> AppActivities {
+    static func importReport(fileName: String) async throws -> ([ResourceAccessData], NetworkActivities) {
         let url = URL.appGroupSharedFolder().appendingPathComponent(fileName)
         let (data, _) = try await URLSession.shared.data(from: url)
         guard let content = String(data: data, encoding: .ascii) else { throw ReportError.error }
-        return try await ReportParser.parse(content: content)
+        return try await ReportParser().parse(content: content)
     }
 
     static func jsonFileListInApp() async throws -> [String] {
@@ -22,8 +22,8 @@ enum Helper {
         }
     }
 
-    static func filteredApps(apps: AppActivities, searchText: String) -> [String] {
-        Array(apps.keys).filter {
+    static func filteredApps(networkActivities: NetworkActivities, searchText: String) -> [String] {
+        Array(networkActivities.keys).filter {
             searchText.isEmpty
             ? true
             : $0.lowercased().contains(searchText.lowercased())
