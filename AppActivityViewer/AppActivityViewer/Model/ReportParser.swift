@@ -7,20 +7,36 @@
 
 import Foundation
 
+enum ReportError: Error {
+    case error
+}
+
 enum ReportParser {
-    enum DataError: Error {
-        case formatError
-    }
-
     static func parse(content: String) async throws -> AppActivities {
-        guard let range = content.range(of: "<end-of-section>\"}") else { throw DataError.formatError }
+        typealias AppActivityContinuation = CheckedContinuation<AppActivities, Error>
+        return try await withCheckedThrowingContinuation { (continuation: AppActivityContinuation) in
+            DispatchQueue.global(qos: .userInitiated).async {
+                guard let range = content.range(of: "<end-of-section>\"}") else {
+                    continuation.resume(throwing: ReportError.error)
+                    return
+                }
 
-        let jsonString = content[range.upperBound...]
-        guard let jsonData = jsonString.data(using: .ascii) else { throw DataError.formatError }
+                let jsonString = content[range.upperBound...]
+                guard let jsonData = jsonString.data(using: .ascii) else {
+                    continuation.resume(throwing: ReportError.error)
+                    return
+                }
 
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
 
-        return try decoder.decode(AppActivities.self, from: jsonData)
+                do {
+                    let activities = try decoder.decode(AppActivities.self, from: jsonData)
+                    continuation.resume(returning: activities)
+                } catch {
+                    continuation.resume(throwing: ReportError.error)
+                }
+            }
+        }
     }
 }

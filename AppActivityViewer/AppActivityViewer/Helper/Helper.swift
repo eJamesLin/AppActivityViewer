@@ -10,7 +10,8 @@ import Foundation
 enum Helper {
     static func importReport(fileName: String) async throws -> AppActivities {
         let url = URL.appGroupSharedFolder().appendingPathComponent(fileName)
-        let content = try String(contentsOf: url)
+        let (data, _) = try await URLSession.shared.data(from: url)
+        guard let content = String(data: data, encoding: .ascii) else { throw ReportError.error }
         return try await ReportParser.parse(content: content)
     }
 
