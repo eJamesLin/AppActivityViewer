@@ -13,7 +13,11 @@ enum ReportError: Error {
 
 enum ReportParser {
     static func parse(content: String) async throws -> AppActivities {
+
+        // FIXME: Use the new Swift concurrency to replace GCD
+
         typealias AppActivityContinuation = CheckedContinuation<AppActivities, Error>
+
         return try await withCheckedThrowingContinuation { (continuation: AppActivityContinuation) in
             DispatchQueue.global(qos: .userInitiated).async {
                 guard let range = content.range(of: "<end-of-section>\"}") else {
