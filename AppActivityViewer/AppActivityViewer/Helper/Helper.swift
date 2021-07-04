@@ -8,23 +8,10 @@
 import Foundation
 
 enum Helper {
-
-    enum DataError: Error {
-        case formatError
-    }
-
     static func importReport(fileName: String) async throws -> AppActivities {
         let url = URL.appGroupSharedFolder().appendingPathComponent(fileName)
         let content = try String(contentsOf: url)
-        guard let range = content.range(of: "<end-of-section>\"}") else { throw DataError.formatError }
-
-        let jsonString = content[range.upperBound...]
-        guard let jsonData = jsonString.data(using: .ascii) else { throw DataError.formatError }
-
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-
-        return try decoder.decode(AppActivities.self, from: jsonData)
+        return try await ReportParser.parse(content: content)
     }
 
     static func jsonFileListInApp() async throws -> [String] {
@@ -41,5 +28,4 @@ enum Helper {
             : $0.lowercased().contains(searchText.lowercased())
         }
     }
-
 }
