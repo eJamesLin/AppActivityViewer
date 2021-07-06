@@ -31,8 +31,8 @@ enum ReportParser {
         return try await withCheckedThrowingContinuation { (continuation: Continuation) in
             DispatchQueue.global(qos: .userInitiated).async {
 
-                let array = content.split(separator: "\n")
-                    .dropLast() // drop { "_marker" : "<end-of-section>" }
+                let array = content.split(separator: "\n")[0...100]
+//                    .dropLast() // drop { "_marker" : "<end-of-section>" }
 
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .iso8601

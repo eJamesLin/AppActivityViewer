@@ -21,7 +21,18 @@ struct AppsView: View {
 
     var body: some View {
         ZStack {
-            if let networkActivities = networkActivities {
+            if let resourcesAccess = resourcesAccess {
+                List {
+                    ForEach(resourcesAccess) { resourceAccessData in
+                        HStack {
+                            Text(resourceAccessData.resourceDisplayName)
+                            Text(resourceAccessData.accessor.identifier)
+                            Text(resourceAccessData.timestamp)
+                        }
+                    }
+                }
+            }
+            else if let networkActivities = networkActivities {
                 VStack {
                     SearchBar(text: $searchText, placeholder: "")
                     List {

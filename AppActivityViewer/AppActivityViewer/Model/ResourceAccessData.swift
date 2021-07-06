@@ -7,11 +7,17 @@
 
 import Foundation
 
-struct ResourceAccessData: Decodable {
+/// https://developer.apple.com/documentation/foundation/urlrequest/inspecting_app_activity_data
+struct ResourceAccessData: Decodable, Identifiable {
+    var id: String {
+        identifier
+    }
+
     struct Accessor: Decodable {
         let identifier: String
         let identifierType: String
     }
+
     let stream: String
     let accessor: Accessor
     let tccService: String?
@@ -19,4 +25,21 @@ struct ResourceAccessData: Decodable {
     let kind: String
     let timestamp: String
     let version: Int
+
+    var resourceDisplayName: String {
+        switch stream {
+        case "com.apple.privacy.accounting.stream.tcc":
+            if let service = tccService, service.hasPrefix("kTCCService") {
+                return service.deletingPrefix("kTCCService")
+            } else {
+                return "Sensor or user data"
+            }
+        case "com.apple.privacy.accounting.stream.replay-kit":
+            return "Screen sharing"
+        case "com.apple.privacy.accounting.stream.location":
+            return "Location"
+        default:
+            return stream
+        }
+    }
 }
